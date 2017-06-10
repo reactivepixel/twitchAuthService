@@ -1,5 +1,6 @@
 const express = require('express');
 const body_parser = require('body-parser');
+const exphbs  = require('express-handlebars');
 const cookie_parser = require('cookie-parser');
 const cookie_session = require('cookie-session');
 const passport = require('passport');
@@ -11,8 +12,8 @@ const port = process.env.PORT | 3000;
 
 var app = express();
 
-app.set("views", "./src/views");
-app.set("view engine", "ejs");
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 // Middleware
 app.use(body_parser.urlencoded({ extended: true }));
@@ -47,15 +48,13 @@ passport.deserializeUser(function(user, done) {
 });
 
 app.get("/", function (req, res) {
-    res.render("index");
+    res.render('home');
 });
 
 app.get("/auth/twitch", passport.authenticate("twitch"), (req, res) => {
   res.json({nailed: 'it'})
 });
-app.get("/", (req, res) => {
-  res.json({hello: 'world'});
-});
+
 app.get("/auth/twitch/callback", passport.authenticate("twitch", { failureRedirect: "/" }), function(req, res) {
     // Successful authentication, redirect home.
     res.redirect("/");
