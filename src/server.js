@@ -50,7 +50,12 @@ app.get("/", function (req, res) {
     res.render("index");
 });
 
-app.get("/auth/twitch", passport.authenticate("twitch"));
+app.get("/auth/twitch", passport.authenticate("twitch"), (req, res) => {
+  res.json({nailed: 'it'})
+});
+app.get("/", (req, res) => {
+  res.json({hello: 'world'});
+});
 app.get("/auth/twitch/callback", passport.authenticate("twitch", { failureRedirect: "/" }), function(req, res) {
     // Successful authentication, redirect home.
     res.redirect("/");
