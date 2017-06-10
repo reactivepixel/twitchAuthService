@@ -56,6 +56,8 @@ app.get("/auth/twitch/callback", passport.authenticate("twitch", { failureRedire
     res.redirect("/");
 });
 
-app.listen(port);
+app.listen(port, ()=>{
+  console.log('Server up and running on port', port);
+});
 
 //twitchRedirect
