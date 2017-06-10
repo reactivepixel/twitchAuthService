@@ -7,6 +7,8 @@ const twitchStrategy = require('passport-twitch').Strategy;
 
 const User = require('./models/db').user;
 
+const port = process.env.PORT | 3000;
+
 var app = express();
 
 app.set("views", "./src/views");
@@ -54,6 +56,6 @@ app.get("/auth/twitch/callback", passport.authenticate("twitch", { failureRedire
     res.redirect("/");
 });
 
-app.listen(3000);
+app.listen(port);
 
 //twitchRedirect
