@@ -49,9 +49,9 @@ passport.deserializeUser(function(user, done) {
 
 app.get("/", (req, res) => {
     //res.render('home');
-    res.json({ status: true });
+    res.render('home');
 });
-//
+
 app.get("/auth/twitch", passport.authenticate("twitch"));
 
 app.get("/auth/twitch/callback", passport.authenticate("twitch", { failureRedirect: "/" }), function(req, res) {
