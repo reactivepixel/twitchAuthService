@@ -8,7 +8,7 @@ const body_parser = require('body-parser');
 
 // const User = require('./models/db').user;
 
-const port = process.env.PORT | 3000;
+const port = process.env.PORT || 3000;
 
 var app = express();
 //
