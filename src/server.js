@@ -54,8 +54,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/auth/twitch", passport.authenticate("twitch", {forceVerify: true}));
-
-app.get("/auth/twitch/callback", passport.authenticate("twitch", { failureRedirect: "/", successRedirect: '/success' }));
+app.get("/auth/twitch/callback", passport.authenticate("twitch", { failureRedirect: "/", successRedirect: '/auth/success' }));
 
 app.listen(port, () => {
   console.log('Server up and running on port', port);
