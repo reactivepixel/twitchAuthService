@@ -52,10 +52,12 @@ app.get("/", (req, res) => {
     res.render('home');
 });
 
-app.get("/auth/twitch", passport.authenticate("twitch"));
+app.get("/auth/twitch", passport.authenticate("twitch", {forceVerify: true}));
 
 app.get("/auth/twitch/callback", passport.authenticate("twitch", { failureRedirect: "/" }), function(req, res) {
     // Successful authentication, redirect home.
+
+    console.log('Successful Integration made');
     res.redirect("/");
 });
 
