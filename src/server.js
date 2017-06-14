@@ -34,8 +34,8 @@ passport.use(new twitchStrategy({
     // User.findOrCreate({ twitchId: profile.id }, function (err, user) {
     //   return done(err, user);
     // });
-    console.log('Debug: accessToken', accessToken);
-    console.log('Debug: refreshToken', refreshToken);
+    // console.log('Debug: accessToken', accessToken);
+    // console.log('Debug: refreshToken', refreshToken);
     console.log('Debug: Profile', profile);
   }
 ));
@@ -54,12 +54,7 @@ app.get("/", (req, res) => {
 
 app.get("/auth/twitch", passport.authenticate("twitch", {forceVerify: true}));
 
-app.get("/auth/twitch/callback", passport.authenticate("twitch", { failureRedirect: "/" }), function(req, res) {
-    // Successful authentication, redirect home.
-
-    console.log('Successful Integration made');
-    res.redirect("/");
-});
+app.post("/auth/twitch/callback", passport.authenticate("twitch", { failureRedirect: "/", successRedirect: '/success' }));
 
 app.listen(port, () => {
   console.log('Server up and running on port', port);
