@@ -29,7 +29,7 @@ passport.use(new twitchStrategy({
     callbackURL: "https://twitch-auth-service-production.herokuapp.com/auth/twitch/callback",
     scope: "user_read"
   },
-  (accessToken, refreshToken, profile) => {
+  (accessToken, refreshToken, profile, done) => {
     // Suppose we are using mongo..
     // User.findOrCreate({ twitchId: profile.id }, function (err, user) {
     //   return done(err, user);
@@ -37,6 +37,7 @@ passport.use(new twitchStrategy({
     // console.log('Debug: accessToken', accessToken);
     // console.log('Debug: refreshToken', refreshToken);
     console.log('Debug: Profile', profile);
+    done(null, profile);
   }
 ));
 passport.serializeUser(function(user, done) {
